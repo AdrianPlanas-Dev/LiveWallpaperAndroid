@@ -55,12 +55,17 @@ public class LandscapeAdapter extends RecyclerView.Adapter<LandscapeAdapter.Land
         holder.image.setImageResource(landscapeImages[position]);
 
         holder.itemView.setOnClickListener(v -> {
-            String selectedLandscape = landscapeNames[position];
-            android.widget.Toast.makeText(
-                    v.getContext(),
-                    "Has seleccionado: " + selectedLandscape,
-                    Toast.LENGTH_SHORT
-            ).show();
+            android.content.Intent intent =
+                    new android.content.Intent(
+                            v.getContext(),
+                            LandscapePreviewActivity.class
+                    );
+
+            intent.putExtra("landscape_name", landscapeNames[position]);
+            intent.putExtra("landscape_info", landscapeInfo[position]);
+            intent.putExtra("landscape_image", landscapeImages[position]);
+
+            v.getContext().startActivity(intent);
         });
     }
 
